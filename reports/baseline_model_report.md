@@ -1,4 +1,3 @@
-
 # Baseline Model Evaluation
 
 - Model: RandomForestClassifier
@@ -15,4 +14,4 @@
 
 ### Confusion Matrix:
 
-![Confusion matrix](/datav1.6_RandomForestClassifier_confusion_matrix.png)
+![Confusion matrix](./datav1.6_RandomForestClassifier_confusion_matrix.png)

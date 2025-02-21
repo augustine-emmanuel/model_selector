@@ -35,7 +35,7 @@ cat <<-EOF > $markdown_file
 
 ### Confusion Matrix:
 
-![Confusion matrix]($reports/data${version}_${model}_confusion_matrix.png)
+![Confusion matrix](./data${version}_${model}_confusion_matrix.png)
 EOF
 
 echo -e "\n!data${version}_${model}_confusion_matrix.png\n\n!data${version}_${model}_class_report.csv" >> .gitignore
