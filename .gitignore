@@ -1,3 +1,11 @@
 *.csv
 
 *.png
+
+!datav1.6_RandomForestClassifier_confusion_matrix.png
+
+!datav1.6_RandomForestClassifier_class_report.csv
+
+!datav1.6_RandomForestClassifier_confusion_matrix.png
+
+!datav1.6_RandomForestClassifier_class_report.csv
