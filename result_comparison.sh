@@ -1,41 +1,54 @@
 #!bin/bash
-file_name="reports/baseline_model_results.csv"
 
-markdown_file="reports/baseline_model_report.md"
+# Filepaths
+FILE_NAME="reports/baseline_MODEL_results.csv"
 
-best_model=$(sort -t, -nk5 -nr $file_name | head -n 1)
+MARKDOWN_FILE="reports/baseline_MODEL_report.md"
 
-version=$(echo $best_model | cut -d, -f1)
-model=$(echo $best_model | cut -d, -f2)
-precision=$(echo $best_model | cut -d, -f3)
-recall=$(echo $best_model | cut -d, -f4)
-F1_score=$(echo $best_model | cut -d, -f5)
-roc_auc=$(echo $best_model | cut -d, -f6)
+# Sort sccorrding to F1-Score column in numeric descending order
+# assign to BEST_MODEL
+BEST_MODEL=$(sort -t, -nk5 -nr $FILE_NAME | head -n 1)
 
-if $markdown_file
+
+# Extract data version, model and metrics
+VERSION=$(echo $BEST_MODEL | cut -d, -f1)
+MODEL=$(echo $BEST_MODEL | cut -d, -f2)
+PRECISION=$(echo $BEST_MODEL | cut -d, -f3)
+RECALL=$(echo $BEST_MODEL | cut -d, -f4)
+F1_SCORE=$(echo $BEST_MODEL | cut -d, -f5)
+ROC_AUC=$(echo $BEST_MODEL | cut -d, -f6)
+
+# check for markdown file and delete if found
+# create a new markdown file
+if $MARKDOWN_FILE
   then
-    rm $markdown_file
+    rm $MARKDOWN_FILE
+    touch $MARKDOWN_FILE
   else
-    touch $markdown_file
+    touch $MARKDOWN_FILE
 fi
-cat <<-EOF > $markdown_file
-# Baseline Model Evaluation
 
-- Model: $model
+# create a new markdown file
+cat <<-EOF > $MARKDOWN_FILE
+# Baseline MODEL Evaluation
 
-- Data Version: $version
+- MODEL: $MODEL
+
+- Data VERSION: $VERSION
 
 ## Metrics
 
-- F1-Score: $F1_score
+- F1-Score: $F1_SCORE
 
-- Precision: $precision
+- PRECISION: $PRECISION
 
-- ROC-AUC: $roc_auc
+- ROC-AUC: $ROC_AUC
 
 ### Confusion Matrix:
 
-![Confusion matrix]($reports/data${version}_${model}_confusion_matrix.png)
+![Confusion matrix](./data${VERSION}_${MODEL}_confusion_matrix.png)
 EOF
 
-echo -e "\n!data${version}_${model}_confusion_matrix.png\n\n!data${version}_${model}_class_report.csv" >> .gitignore
+# exclude best model confusion matrix and report from gitignore
+echo -e "\n!data${VERSION}_${MODEL}_confusion_matrix.png\n\n!data${VERSION}_${MODEL}_class_report.csv" >> .gitignore
+
